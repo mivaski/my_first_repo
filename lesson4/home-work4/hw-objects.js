@@ -32,16 +32,16 @@ user.introduction = function () {
     console.log( (this.name));
 };
 
-user.Hobbies = function () {
+user.hobbies = function () {
     console.log ( 'My hobbies are:');
     console.log((this.hobbies.join(', ')));
 };
 
-user.Location = function () {
+user.location = function () {
     console.log( 'I live in' );
     console.log(this.address.city);
 };
 
 user.introduction();
-user.Hobbies();
-user.Location();
+user.hobbies();
+user.location();
