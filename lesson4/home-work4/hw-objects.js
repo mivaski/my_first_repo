@@ -2,17 +2,34 @@
 //Створити файл objects.js, у якому зробити комплексний об’єкт,
 //що мав би мінімум 2 рівні ієрархії, масив та метод, який виводитиме значення
 
-const user = {};
+export const user = {
+    get userHobbies() {
+        return user.hobbies;
+    },
+    set userHobbies (value) {
+        this.hobbies = value;
+    },
+    get userAddress() {
+        return this.address;
+    }
+};
 
 user.name = 'Mariia';
 user['company'] = 'SoftServe';
-user['job position'] = 'manual QC engineer';
+user['jobPosition'] = 'manual QC engineer';
 user.hobbies = ['reading', 'pub-quizzes', 'TRX'];
 user.address = {
     country: 'Ukraine',
     citizenship: true,
     city: 'Ivano-Frankivsk',
-    zip: 760010
+    zip: 760010,
+
+    get _zip () {
+        return this.zip;
+    },
+    set _zip(value) {
+        this.zip = value;
+    }
 };
 
 console.log(user);
@@ -32,7 +49,7 @@ user.introduction = function () {
     console.log( (this.name));
 };
 
-user.hobbies = function () {
+user.getHobbies = function () {
     console.log ( 'My hobbies are:');
     console.log((this.hobbies.join(', ')));
 };
@@ -43,5 +60,5 @@ user.location = function () {
 };
 
 user.introduction();
-user.hobbies();
+user.getHobbies();
 user.location();
