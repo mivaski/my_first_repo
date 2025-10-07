@@ -2,36 +2,28 @@
 // і внаслідок помилки запит направлятиметься на той, що існує. Якщо і на іншому ресурсі
 // з якихось причин буде хибна відповідь від сервера —згенерувати власну помилку.
 
-async function sendRequest(url) {
-    const response = await fetch(url);
-    const json = await response.json();
-    return json;
-};
 
 async function sendFakeJsonRequest() {
     console.log('sending request...');
     try {
-        const response = await sendRequest('https://json-apa.mock.beeceptor.com/companies');
-        console.log(response);
-        return response;
+        const response = await fetch('https://json-apa.mock.beeceptorrrr.com/companies');
+        const json = await response.json();
+        return json;
     } catch (error) {
-        if (error.message.includes('Hey ya!')) {
-            try {
-                const response = await sendRequest('https://json-api.mock.beeceptor.com/companies');
-                return response;
-            } catch (error) {
-                if (error.message.includes('Hey ya!')) {
-                    throw new Error('You cannot reach the URL');
-                }
-                throw new Error('Something Went Wrong');
+        if (error.message === 'fetch failed') {
+            const response = await fetch('https://json-apa.mock.beeceptor.com/companies');
+            if (!response.ok) {
+                throw new Error('Data cannot be found');
             }
+            const json = await response.json();
+            return json;
         }
 
-        throw new Error('Something Went Wrong');
+        throw error;
     }
-};
+}
 
-(async function() {
+(async function () {
     const response = await sendFakeJsonRequest();
     console.log(response);
 })();
