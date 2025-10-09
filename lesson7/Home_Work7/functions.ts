@@ -1,0 +1,25 @@
+function sum(args: (string | boolean | number )[]): number {
+    return args.reduce(function (acc: number, value: string | number | boolean): number {
+        return acc + Number(value);
+    }, 0);
+}
+
+const numArr = [1, -88, 10, 55, 105];
+const numStr = ['15', '2', true, '10', '5'];
+//const numStr = ['tree', '2', true, 'two', '5']; виведе NaN в термінал
+
+console.log(sum(numArr));
+console.log(sum(numStr));
+
+
+// function sortAlphabetically(arr) {
+//     return arr.sort();
+// }
+function sortAlphabetically(arr: string[]): string[] {
+    return arr.sort();
+}
+
+const fruits = ['Pear', 'Banana', 'Pineapple', 'Guava' ];
+
+const sortedFruits = sortAlphabetically(fruits);
+console.log( 'Sorted Strings:', sortedFruits);
