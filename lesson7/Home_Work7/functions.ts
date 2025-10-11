@@ -1,6 +1,7 @@
 function sum(args: (string | boolean | number )[]): number {
     return args.reduce(function (acc: number, value: string | number | boolean): number {
-        return acc + Number(value);
+        const num = Number(value);
+        return isNaN(num) ? acc : acc + num;
     }, 0);
 }
 

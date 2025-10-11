@@ -1,7 +1,8 @@
 export {};
 const sum = (args: (string | number | boolean)[]):number =>
     args.reduce(function (acc: number, value: string | number | boolean): number {
-        return acc + Number(value);
+        const num = Number(value);
+        return isNaN(num) ? acc : acc + num;
     }, 0);
 
 const numArray = [1, -88, 10, 55, 105];
