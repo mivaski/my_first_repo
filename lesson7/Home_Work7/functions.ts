@@ -6,11 +6,12 @@ function sum(args: (string | boolean | number )[]): number {
 
 const numArr = [1, -88, 10, 55, 105];
 const numStr = ['15', '2', true, '10', '5'];
-//const numStr = ['tree', '2', true, 'two', '5']; виведе NaN в термінал
+const mixArray = [23, 'two', false, 'something'];
+
 
 console.log(sum(numArr));
 console.log(sum(numStr));
-
+console.log(sum(mixArray));
 
 // function sortAlphabetically(arr) {
 //     return arr.sort();
