@@ -1,6 +1,7 @@
 {
   "include": [
-    "**/*"
+    "**/*",
+    "../../lesson9/**/*"
   ],
   "exclude": [
     "eslint.config.mjs",
@@ -8,12 +9,10 @@
     "./node_modules/**/*"
   ],
   "compilerOptions": {
-    "composite": true,
     "baseUrl": "./",
-    "target": "ES6",
-    "lib": ["es6", "DOM"],
-    "module": "commonjs",
-    "rootDir": ".",
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "module": "ESNext",
     "resolveJsonModule": true,
     "allowJs": true,
     "outDir": "build",
@@ -24,9 +23,9 @@
     "experimentalDecorators": true,
     "strict": true,
     "skipLibCheck": true,
-    "isolatedModules": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ]
-  }
+    "typeRoots": ["node_modules/@types"],
+
+    "rootDirs": ["./", "../../lesson9"]   // ⬅️ add this, remove "rootDir"
+  },
+  "references": [{ "path": "../../lesson9" }]
 }

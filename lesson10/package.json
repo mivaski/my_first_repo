@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "@jest/globals": "^30.2.0",
+    "@types/chai": "^5.2.2",
+    "@types/expect": "^1.20.4",
+    "@types/jest": "^30.0.0",
+    "@types/mocha": "^10.0.10",
+    "chai": "^6.2.0",
+    "cross-env": "^10.1.0",
+    "globals": "^16.4.0",
+    "jest": "^30.2.0",
+    "mocha": "^11.7.4",
+    "ts-jest": "^29.4.5",
+    "ts-mocha": "^11.1.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
