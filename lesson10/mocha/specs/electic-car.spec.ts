@@ -18,7 +18,9 @@ describe('Tesla chargeBattery', () => {
 
     it('should do nothing when battery is 100%', () => {
         const tesla = new Tesla('Tesla', 'model 3', 2022, 100);
+        
         const result = tesla.chargeBattery();
+        
         expect(result.charge).to.equal(100);
         expect(tesla.chargePercentage).to.equal(100);
     });
