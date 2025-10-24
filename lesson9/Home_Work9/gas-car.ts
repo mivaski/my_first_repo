@@ -1,23 +1,22 @@
 import { Car } from './abstracts/abstract';
 import { Maintainable } from './interface/interface';
 
-class GasCar extends Car {
+export class GasCar extends Car {
     public constructor(
         brand: string,
         model: string,
         year: number,
         private fuelCapacity: number,
-        private fuelConsumption: number
+        private fuelLevel: number
     ) {
         super(brand, model, year);
     }
 
-    public startEngine(): void {
-        if (this.fuelCapacity <= 0) {
-            console.log(`${this.getDescription()} - fuel empty. Engine cannot start.`);
-        } else {
-            console.log(`${this.getDescription()} - ${this.fuelCapacity}L left - engine is vroom-vroom`);
+    public startEngine(): string {
+        if (this.fuelLevel <= 0) {
+            return `${this.getDescription()} - fuel empty. Engine cannot start.`;
         }
+        return `${this.getDescription()} - ${this.fuelLevel}L left - engine is vroom-vroom`;
     }
 
     public stopEngine(): void {
@@ -25,11 +24,11 @@ class GasCar extends Car {
     }
 
     public calculateMaxDistance(): number {
-        if (this.fuelConsumption <= 0) {
+        if (this.fuelLevel <= 0) {
             throw new Error('Fuel consumption must be greater than zero.');
         }
 
-        return Math.round(this.fuelCapacity / this.fuelConsumption) * 100;
+        return Math.round(this.fuelCapacity / this.fuelLevel) * 100;
     }
 
 }
@@ -84,11 +83,16 @@ export class GasStation {
 
 }
 
-// const bmw = new BMW('BMW', 'X5', 2024, 80, 9);
-// bmw.startEngine();
-// console.log(`Max distance: ${bmw.calculateMaxDistance()} km`);
+// const bmw = new BMW('BMW', 'X5', 2024, 80, 0);
+// console.log(bmw.startEngine());
+// try {
+//     const distance = bmw.calculateMaxDistance();
+//     console.log(`Max distance: ${distance} km`);
+// } catch (error) {
+//     console.error('Error calculating distance:', (error as Error).message);
+// }
 // bmw.stopEngine();
-
 
 // const gasStation = new GasStation(bmw);
 // gasStation.maintain();
+
