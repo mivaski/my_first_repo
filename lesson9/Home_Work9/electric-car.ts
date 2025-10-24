@@ -1,18 +1,18 @@
 import { Car } from './abstracts/abstract';
 import { Maintainable } from './interface/interface';
 
-export class ElectricCar extends Car {
+class ElectricCar extends Car {
     public constructor(
         brand: string,
         model: string,
         year: number,
-        public chargePercentage: number
+        private chargePercentage: number
     ) {
         super(brand, model, year);
     }
 
     public startEngine(): void {
-        console.log(`${this.getDescription()} - Charge: ${this.chargePercentage}%  left- engine is woof`);
+        console.log(`${this.getDescription()} - left ${this.chargePercentage}% - engine is woof`);
     }
 
     public stopEngine(): void {
@@ -20,24 +20,14 @@ export class ElectricCar extends Car {
     }
 }
 
-export interface Chargeable extends Maintainable{
-    chargeBattery(): { status: string; charge: number };
+interface Chargeable extends Maintainable{
+    chargeBattery(): void;
     replaceBattery(): void;
 }
 
 export class Tesla extends ElectricCar implements Chargeable {
-
-    public chargeBattery(): { status: string; charge: number } {
-        console.log('charge battery');
-        while (this.chargePercentage < 100) {
-            this.chargePercentage = Math.min(100, this.chargePercentage + 10);
-            console.log(`${this.getDescription()} - charging... ${this.chargePercentage}%`);
-        }
-
-        return {
-            status: `${this.getDescription()} - fully charged!`,
-            charge: this.chargePercentage
-        };
+    public chargeBattery(): void {
+        console.log(`${this.getDescription()} - is charging`);
     }
 
     public replaceBattery(): void {
@@ -58,8 +48,8 @@ export class ElectricCarStation {
         private car: Chargeable
     ) {}
 
-    public charge(): { status: string; charge: number } {
-        return this.car.chargeBattery();
+    public charge(): void {
+        this.car.chargeBattery();
     }
 
     public replaceBattery(): void {
@@ -86,10 +76,6 @@ export class ElectricCarStation {
 // const tesla = new Tesla('Tesla', 'model 3', 2022, 69);
 // tesla.startEngine();
 // tesla.stopEngine();
-
-// const result = tesla.chargeBattery();
-// console.log(result.status);
-// console.log(`Current charge: ${result.charge}%`);
 
 // const electricCarChargeStation = new ElectricCarStation(tesla);
 // electricCarChargeStation.maintain();

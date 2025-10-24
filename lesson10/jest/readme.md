@@ -1,1 +1,0 @@
-# This is the project for lesson 9 - OOP and SOLID
