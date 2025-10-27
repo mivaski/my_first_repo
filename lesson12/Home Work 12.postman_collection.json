@@ -1,0 +1,485 @@
+{
+	"info": {
+		"_postman_id": "3b089821-7e32-490a-a20c-75e2d571a2cb",
+		"name": "Home Work 12",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49524816",
+		"_collection_link": "https://mivaskisoft-1009854.postman.co/workspace/Mariia-Ivaskiv's-Workspace~64d17392-0319-4176-81d4-7be2838696da/collection/49524816-3b089821-7e32-490a-a20c-75e2d571a2cb?action=share&source=collection_link&creator=49524816"
+	},
+	"item": [
+		{
+			"name": "Ping",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('response body should include \"pong\"', function () {\r",
+							"    pm.expect(pm.response.text()).to.include('pong');\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/ping",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Random Joke",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('should return an single object', function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    const joke = pm.response.json();\r",
+							"\r",
+							"    pm.expect(joke).to.be.an(\"object\");\r",
+							"    pm.expect(joke).to.have.property(\"setup\");\r",
+							"    pm.expect(joke).to.have.property(\"punchline\");\r",
+							"    pm.expect(joke).to.have.property(\"id\");\r",
+							"    pm.expect(joke).to.have.property(\"type\");\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/random_joke",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"random_joke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Random Ten",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response should return 10 jokes', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    const jokes = pm.response.json();\r",
+							"\r",
+							"    pm.expect(jokes).to.be.an('array');\r",
+							"    pm.expect(jokes.length).to.eql(10);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/random_ten",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"random_ten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jokes Types",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('should return existing types of jokes', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    \r",
+							"    const types = pm.response.json();\r",
+							"\r",
+							"    pm.expect(types).to.include.members(['general', 'programming', 'knock-knock', 'dad']);\r",
+							"    pm.expect(types).to.have.lengthOf(4);\r",
+							"    pm.expect(types).to.not.include('unknown');\r",
+							"    pm.expect(types).to.not.include('number');  \r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/types",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10 Jokes by Type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('should return 10 jokes with the correct type', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    \r",
+							"    const jokes = pm.response.json();\r",
+							"    const allowedTypes = [\"programming\", \"general\", \"dad\", \"knock-knock\"];\r",
+							"\r",
+							"    pm.expect(jokes).to.be.an('array');\r",
+							"    pm.expect(jokes.length).to.be.within(1, 10);\r",
+							"\r",
+							"    jokes.forEach(joke => {\r",
+							"        pm.expect(joke.type).to.be.oneOf(allowedTypes);\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/jokes/dad/ten",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"jokes",
+						"dad",
+						"ten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Random by Type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('jokes should have correct type', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    \r",
+							"    const joke = pm.response.json();\r",
+							"    const allowedTypes = [\"programming\", \"general\", \"dad\", \"knock-knock\"];\r",
+							"\r",
+							"\r",
+							"    pm.expect(joke).to.be.an('array');\r",
+							"    pm.expect(joke.length).to.be.equal(1);\r",
+							"\r",
+							"    joke.forEach(joke => {\r",
+							"        pm.expect(joke.type).to.be.oneOf(allowedTypes);\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/jokes/{{type3}}/random",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"jokes",
+						"{{type3}}",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Joke by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('should return existing joke by ID', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    \r",
+							"    const joke = pm.response.json();\r",
+							"\r",
+							"    pm.expect(joke).to.have.property('id');\r",
+							"    pm.expect(joke.id).to.be.a('number');\r",
+							"    pm.expect(joke.id).not.to.be.a('sting');\r",
+							"    pm.expect(joke.id).to.be.greaterThan(0);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/jokes/15",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"jokes",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ID error",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code is 404 for non-existing joke', function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test('should return an error message for non-existing joke', function () {\r",
+							"\r",
+							"    const err = pm.response.json();\r",
+							"\r",
+							"    pm.expect(err).to.be.an('object');\r",
+							"    pm.expect(err).to.have.all.keys('type', 'message');\r",
+							"    pm.expect(err).to.have.property('message');\r",
+							"    pm.expect(err.message).to.include(\"not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/jokes/555",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"jokes",
+						"555"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "num error",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('should return error in case ID is not a number', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"   const response = pm.response.text();\r",
+							"\r",
+							"   pm.expect(response).to.include('The passed path is not a number');\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/jokes/random/string",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"jokes",
+						"random",
+						"string"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "exceed num error",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('should return error when num exceeds count', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    const response = pm.response.text();\r",
+							"    \r",
+							"    pm.expect(response).to.include('exceeds the number of jokes');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/jokes/random/1000",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"jokes",
+						"random",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"key": "type1",
+			"value": ""
+		},
+		{
+			"key": "type2",
+			"value": ""
+		},
+		{
+			"key": "type3",
+			"value": ""
+		},
+		{
+			"key": "type4",
+			"value": ""
+		}
+	]
+}
