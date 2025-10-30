@@ -1,0 +1,483 @@
+{
+	"info": {
+		"_postman_id": "6302f815-821c-45cc-9920-9eccb9dfdb39",
+		"name": "Home Work 13 - Integration Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49524816",
+		"_collection_link": "https://mivaskisoft-1009854.postman.co/workspace/Mariia-Ivaskiv's-Workspace~64d17392-0319-4176-81d4-7be2838696da/collection/49524816-6302f815-821c-45cc-9920-9eccb9dfdb39?action=share&source=collection_link&creator=49524816"
+	},
+	"item": [
+		{
+			"name": "Search One Image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status is 200', function () {\r",
+							"pm.response.to.have.status(200); });\r",
+							"\r",
+							"const data = pm.response.json();\r",
+							"\r",
+							"pm.test('should return array with 1 item', function(){\r",
+							"    pm.expect(Array.isArray(data)).to.be.true;\r",
+							"    pm.expect(data.length).to.eql(1); });\r",
+							"\r",
+							"pm.test('item should has id and url', function(){\r",
+							"    pm.expect(data[0]).to.have.property('id');\r",
+							"    pm.expect(data[0]).to.have.property('url'); });\r",
+							"    pm.collectionVariables.set('IMAGE_ID', data[0].id);\r",
+							"\r",
+							"pm.test('should save IMAGE_ID', function(){ \r",
+							"    pm.expect(pm.collectionVariables.get('IMAGE_ID')).to.be.a('string').and.not.empty; });"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/images/search?limit=1&size=med&limit=jpg,png",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"images",
+						"search"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "med"
+						},
+						{
+							"key": "limit",
+							"value": "jpg,png"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vote",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status is 201 or 200', function () { \r",
+							"    pm.expect([200,201]).to.include(pm.response.code); });\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"pm.test('Vote response has id', function(){\r",
+							"    pm.expect(data).to.have.property('id'); });\r",
+							"    pm.collectionVariables.set('VOTE_ID', data.id);\r",
+							"\r",
+							"pm.test('Saved VOTE_ID', function(){ \r",
+							"    pm.expect(pm.collectionVariables.get('VOTE_ID')).to.be.ok; });"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"image_id\": \"{{IMAGE_ID}}\", \r\n    \"value\": 1, \r\n    \"sub_id\": \"{{TEST_SUB_ID}}\"\r\n    \r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/votes",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"votes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Vote",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const body = pm.response.json();\r",
+							"pm.test('body should be an object', function () {\r",
+							"    pm.expect(body).to.be.an(\"object\");\r",
+							"\r",
+							"pm.test('field types are correct', function () {\r",
+							"    pm.expect(body.id).to.be.a(\"number\");\r",
+							"    pm.expect(body.user_id).to.be.a(\"string\");\r",
+							"    pm.expect(body.image_id).to.be.a(\"string\");\r",
+							"    pm.expect(body.sub_id).to.be.a(\"string\");\r",
+							"    pm.expect(body.created_at).to.be.a(\"string\");\r",
+							"    pm.expect(body.value).to.be.a(\"number\");\r",
+							"    pm.expect(body.country_code).to.be.a(\"string\");\r",
+							"    pm.expect(body.image).to.be.an(\"object\");\r",
+							"    pm.expect(body.image).to.have.all.keys('id', 'url');\r",
+							"    });\r",
+							"\r",
+							"pm.test('image should have valid values', function () {\r",
+							"    pm.expect(body.image_id).to.eql(body.image.id);\r",
+							"    pm.expect(body.image.url).to.include(body.image_id);\r",
+							"});\r",
+							"\r",
+							"pm.test('vote value is 0 or 1', function () { \r",
+							"    pm.expect([0,1]).to.include(body.value)});\r",
+							"\r",
+							"pm.test('sub_id matches new_sub_id ', function () {\r",
+							"\r",
+							"    const sub = pm.collectionVariables.get(\"TEST_SUB_ID\");\r",
+							"    pm.expect(body.sub_id).to.eql(sub);    \r",
+							"});\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "live_li7G2zIuxuZRzPHOiKMqmbbGp4ZKB4zV8F1yY5zA8apQTckJZyXRBEOOFuTvCOXA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/votes/{{VOTE_ID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"votes",
+						"{{VOTE_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Favs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status is 201 or 200', function () { \r",
+							"    pm.expect([200,201]).to.include(pm.response.code);\r",
+							"});\r",
+							"\r",
+							"const data = pm.response.json();\r",
+							"pm.test('Favourite response should has id', function(){ \r",
+							"    pm.expect(data).to.have.property(\"id\"); \r",
+							"\r",
+							"pm.collectionVariables.set('FAV_ID', data.id);\r",
+							"\r",
+							"pm.test('Saved FAV_ID', function(){ \r",
+							"    pm.expect(pm.collectionVariables.get('FAV_ID')).to.be.ok; });\r",
+							"}); "
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"image_id\": \"{{IMAGE_ID}}\", \r\n    \"sub_id\": \"{{TEST_SUB_ID}}\"\r\n    \r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/favourites",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"favourites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Favs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('response should be an object', function () { \r",
+							"    pm.response.to.have.status(200); \r",
+							"\r",
+							"const obj = pm.response.json();\r",
+							"    pm.expect(obj).to.be.an(\"object\");\r",
+							"    pm.expect(Array.isArray(obj)).to.be.false;\r",
+							"});\r",
+							"\r",
+							"const body = pm.response.json();\r",
+							"pm.test('field types are correct', function () {\r",
+							"    pm.expect(body.id).to.be.a(\"number\");\r",
+							"    pm.expect(body.user_id).to.be.a(\"string\");\r",
+							"    pm.expect(body.image_id).to.be.a(\"string\");\r",
+							"    pm.expect(body.sub_id).to.be.a(\"string\");\r",
+							"    pm.expect(body.created_at).to.be.a(\"string\");\r",
+							"    pm.expect(body.image).to.be.an(\"object\");\r",
+							"    pm.expect(body.image).to.have.all.keys('id', 'url');\r",
+							"});\r",
+							"\r",
+							"pm.test('ids verifying',  function () {\r",
+							"    const sub = pm.collectionVariables.get(\"TEST_SUB_ID\");\r",
+							"    const favID = pm.collectionVariables.get(\"FAV_ID\");\r",
+							"\r",
+							"    pm.expect(body.id).to.eql(favID);\r",
+							"    pm.expect(body.sub_id).to.eql(sub); \r",
+							"});\r",
+							"\r",
+							"pm.test('image should have valid values', function () {\r",
+							"    pm.expect(body.image_id).to.eql(body.image.id);\r",
+							"    pm.expect(body.image.url).to.include(body.image_id);\r",
+							"});\r",
+							"\r",
+							"  \r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "live_li7G2zIuxuZRzPHOiKMqmbbGp4ZKB4zV8F1yY5zA8apQTckJZyXRBEOOFuTvCOXA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/favourites/{{FAV_ID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"favourites",
+						"{{FAV_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vote Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status is 200 or 204', function () { \r",
+							"    pm.expect([200,204]).to.include(pm.response.code); });\r",
+							"\r",
+							"pm.test('Response body is correct', function () {\r",
+							"    pm.expect(pm.response.json()).to.deep.equal({ \"message\": \"SUCCESS\" }); \r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/votes/{{VOTE_ID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"votes",
+						"{{VOTE_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Favs Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status is 200 or 204', function () { \r",
+							"    pm.expect([200,204]).to.include(pm.response.code); });\r",
+							"\r",
+							"pm.test('Response body is correct', function () {\r",
+							"    pm.expect(pm.response.json()).to.deep.equal({ \"message\": \"SUCCESS\" }); \r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/favourites/{{FAV_ID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"favourites",
+						"{{FAV_ID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "live_li7G2zIuxuZRzPHOiKMqmbbGp4ZKlive_li7G2zIuxuZRzPHOiKMqmbbGp4ZKB4zV8F1yY5zA8apQTckJZyXRBEOOFuTvCOXA",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "x-api-key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "https://api.thecatapi.com/v1"
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "IMAGE_ID",
+			"value": ""
+		},
+		{
+			"key": "VOTE_ID",
+			"value": ""
+		},
+		{
+			"key": "TEST_SUB_ID",
+			"value": ""
+		},
+		{
+			"key": "FAV_ID",
+			"value": ""
+		}
+	]
+}
