@@ -151,7 +151,13 @@
 							"    pm.expect(body.value).to.be.a(\"number\");\r",
 							"    pm.expect(body.country_code).to.be.a(\"string\");\r",
 							"    pm.expect(body.image).to.be.an(\"object\");\r",
+							"    pm.expect(body.image).to.have.all.keys('id', 'url');\r",
 							"    });\r",
+							"\r",
+							"pm.test('image should have valid values', function () {\r",
+							"    pm.expect(body.image_id).to.eql(body.image.id);\r",
+							"    pm.expect(body.image.url).to.include(body.image_id);\r",
+							"});\r",
 							"\r",
 							"pm.test('vote value is 0 or 1', function () { \r",
 							"    pm.expect([0,1]).to.include(body.value)});\r",
@@ -171,6 +177,21 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "live_li7G2zIuxuZRzPHOiKMqmbbGp4ZKB4zV8F1yY5zA8apQTckJZyXRBEOOFuTvCOXA",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -198,7 +219,7 @@
 							"});\r",
 							"\r",
 							"const data = pm.response.json();\r",
-							"pm.test('Favorite response should has id', function(){ \r",
+							"pm.test('Favourite response should has id', function(){ \r",
 							"    pm.expect(data).to.have.property(\"id\"); \r",
 							"\r",
 							"pm.collectionVariables.set('FAV_ID', data.id);\r",
@@ -254,16 +275,16 @@
 							"\r",
 							"const body = pm.response.json();\r",
 							"pm.test('field types are correct', function () {\r",
-							"  pm.expect(body.id).to.be.a(\"number\");\r",
-							"  pm.expect(body.user_id).to.be.a(\"string\");\r",
-							"  pm.expect(body.image_id).to.be.a(\"string\");\r",
-							"  pm.expect(body.sub_id).to.be.a(\"string\");\r",
-							"  pm.expect(body.created_at).to.be.a(\"string\");\r",
-							"  pm.expect(body.image).to.be.an(\"object\");\r",
+							"    pm.expect(body.id).to.be.a(\"number\");\r",
+							"    pm.expect(body.user_id).to.be.a(\"string\");\r",
+							"    pm.expect(body.image_id).to.be.a(\"string\");\r",
+							"    pm.expect(body.sub_id).to.be.a(\"string\");\r",
+							"    pm.expect(body.created_at).to.be.a(\"string\");\r",
+							"    pm.expect(body.image).to.be.an(\"object\");\r",
+							"    pm.expect(body.image).to.have.all.keys('id', 'url');\r",
 							"});\r",
 							"\r",
 							"pm.test('ids verifying',  function () {\r",
-							"    const body = pm.response.json();\r",
 							"    const sub = pm.collectionVariables.get(\"TEST_SUB_ID\");\r",
 							"    const favID = pm.collectionVariables.get(\"FAV_ID\");\r",
 							"\r",
@@ -271,11 +292,8 @@
 							"    pm.expect(body.sub_id).to.eql(sub); \r",
 							"});\r",
 							"\r",
-							"pm.test('image_id matches image.id', function () {\r",
+							"pm.test('image should have valid values', function () {\r",
 							"    pm.expect(body.image_id).to.eql(body.image.id);\r",
-							"});\r",
-							"\r",
-							"pm.test('image.url contains image_id', function (){\r",
 							"    pm.expect(body.image.url).to.include(body.image_id);\r",
 							"});\r",
 							"\r",
@@ -283,7 +301,7 @@
 							"\r",
 							"\r",
 							"\r",
-							"// });\r",
+							"\r",
 							"\r",
 							""
 						],
@@ -294,6 +312,21 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "x-api-key",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "live_li7G2zIuxuZRzPHOiKMqmbbGp4ZKB4zV8F1yY5zA8apQTckJZyXRBEOOFuTvCOXA",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -386,13 +419,13 @@
 		"type": "apikey",
 		"apikey": [
 			{
-				"key": "key",
-				"value": "x-api-key",
+				"key": "value",
+				"value": "live_li7G2zIuxuZRzPHOiKMqmbbGp4ZKlive_li7G2zIuxuZRzPHOiKMqmbbGp4ZKB4zV8F1yY5zA8apQTckJZyXRBEOOFuTvCOXA",
 				"type": "string"
 			},
 			{
-				"key": "value",
-				"value": "live_li7G2zIuxuZRzPHOiKMqmbbGp4ZKB4zV8F1yY5zA8apQTckJZyXRBEOOFuTvCOXA",
+				"key": "key",
+				"value": "x-api-key",
 				"type": "string"
 			}
 		]
