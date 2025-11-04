@@ -2,9 +2,10 @@ import { describe, test, expect } from 'vitest';
 import { createCatApi } from '../src/services/config.service';
 import { CatImage } from '../src/types/cat.dto';
 
-const api = createCatApi();
-
 describe('Cat API — /images/search', () => {
+
+    const api = createCatApi();
+
     test('should return array', async () => {
         const res = await api.imagesSearch();
 
