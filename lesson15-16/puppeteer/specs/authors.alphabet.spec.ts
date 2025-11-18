@@ -1,6 +1,6 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { expect } from 'chai';
-import { NavigationPage } from '../src/pom/navigation.page';
+import { NavigationPage} from '../src/pom/navigation.page';
 import { AuthorsPage } from '../src/pom/authors.page';
 
 describe('TC1: Search authors via alphabet (letter "k")', function () {
@@ -14,7 +14,16 @@ describe('TC1: Search authors via alphabet (letter "k")', function () {
     const BASE_URL = process.env.BASE_URL || 'https://nashformat.ua/';
 
     before(async () => {
-        browser = await puppeteer.launch({ headless: false });
+        browser = await puppeteer.launch({ headless: false,
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-notifications',
+                '--disable-infobars',
+                '--disable-geolocation'
+            ]
+        });
+
         page = await browser.newPage();
         await page.setViewport({ width: 1440, height: 900 });
         nav = new NavigationPage(page, BASE_URL);
@@ -34,14 +43,13 @@ describe('TC1: Search authors via alphabet (letter "k")', function () {
     it('can open alphabet list', async () => {
 
         await nav.open();
-        await nav.openAlphabet();
-        const exists = await page.$('#alphabet_list__');
+        const exists = await nav.openAlphabet();
         expect(exists).to.not.equal(null);
     });
 
     it('letter K page shows publishers list', async () => {
 
-        const exists = await page.$('.publishers_list');
+        const exists = await authors.openLetterK();
         expect(exists).to.not.equal(null);
     });
 
