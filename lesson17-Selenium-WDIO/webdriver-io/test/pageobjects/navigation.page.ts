@@ -22,7 +22,7 @@ export class NavigationPage {
 
     public async hoverCategoriesDropdown(): Promise<void> {
         await this.navPublishDrop.moveTo(); // аналог hover
-        await this.catDropActive.waitForDisplayed({ timeout: 15000 });
+        await this.catDropActive.waitForDisplayed();
     }
 
     private get allBooksLink(): ChainablePromiseElement {
@@ -32,6 +32,6 @@ export class NavigationPage {
     public async goToAllBooks(): Promise<void> {
         await this.allBooksLink.click();
         const allCatCategories = $('.all-cat-categories');
-        await allCatCategories.waitForDisplayed({ timeout: 15000 });
+        await allCatCategories.waitForDisplayed();
     }
 }

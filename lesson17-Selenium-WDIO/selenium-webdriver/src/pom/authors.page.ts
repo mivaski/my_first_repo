@@ -40,18 +40,4 @@ export class AuthorsPage {
 
         return hrefs;
     }
-    // public async collectAuthorLinks(): Promise<string[]> {
-    //     const elements = await this.publisherLinks();
-
-    //     return Promise.all(elements.map(async (el) => (await el.getAttribute('href')) || ''));
-    // }
-
-    // public async allLinksBelongToLetterK(): Promise<boolean> {
-    //     const links = await this.collectAuthorLinks();
-    //     return links.every((href) => href.includes('authors/letter-k'));
-    // }
-    // public async allLinksBelongToLetterK(): Promise<boolean> {
-    //     const links = await this.collectAuthorLinks();
-    //     return links.every((href) => href.includes('authors/letter-k'));
-    // }
 }
