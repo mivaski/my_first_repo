@@ -37,9 +37,6 @@ export class CartPopup {
             if (await this.closeButton.isVisible()) {
                 await this.closeButton.evaluate((el) => (el as HTMLElement).click());
             }
-            await this.popup.waitFor({ state: 'hidden', timeout: 5000 }).catch(() => {
-                // intentionally empty
-            });
         }
     }
 }
