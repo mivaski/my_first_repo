@@ -1,15 +1,13 @@
 import { Page } from '@playwright/test';
+import { CartPopup } from '../components/cart-popup/cart-popup';
+import { PageHeader } from '../components/header.nav/cart-icon';
 
-import { CartPopup } from './cartpopup.page';
-import { PageHeader } from './pageheader.page';
-
-export class BasePage {
+export abstract class BasePage {
     public pageHeader: PageHeader;
     public cartPopup: CartPopup;
 
-    public constructor(page: Page) {
+    protected constructor(protected readonly page: Page) {
         this.pageHeader = new PageHeader(page);
         this.cartPopup = new CartPopup(page);
-
     }
 }

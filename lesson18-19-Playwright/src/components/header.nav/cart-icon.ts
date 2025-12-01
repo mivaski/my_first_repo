@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { BaseHeaderComponent } from '../components/base.header';
-import { MainNavigationComponent } from '../components/main-navigation';
+import { BaseHeaderComponent } from './base.header';
+import { MainNavigationComponent } from './main-navigation';
 
 export class PageHeader extends BaseHeaderComponent {
     private cartCount: Locator;

@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { NavItemDto } from '../models/nav-item.dto';
+import { NavItemDto } from '../../models/nav-item.dto';
 import { BaseHeaderComponent } from './base.header';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 
@@ -56,4 +56,9 @@ export class MainNavigationComponent extends BaseHeaderComponent {
 
         return new DropdownMenuComponent(dropdownRoot);
     }
+
+    public async openSubmenu(name: string): Promise<DropdownMenuComponent> {
+        await this.hoverItem(name);
+        return this.getDropdown(name);
+}
 }
