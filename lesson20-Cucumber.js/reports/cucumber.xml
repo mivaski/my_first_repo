@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<testsuite name="Cucumber" time="20.771" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-12-02T20:44:20.910Z">
+  <testcase classname="Book Store Cart Functionality test" name="Adding book to the cart" time="7.219">
+    <system-out><![CDATA[Given User is on the Non-fiction page.......................................passed
+And User adds the first Non-fiction book to the cart........................passed
+When User closes the cart popup.............................................passed
+Then the cart counter should be greater than 0..............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Book Store Cart Functionality test" name="User can clear cart and see empty cart message" time="6.155">
+    <system-out><![CDATA[Given User is on the Non-fiction page.......................................passed
+And User adds the first Non-fiction book to the cart........................passed
+When User clears the cart from the popup....................................passed
+Then User should see an empty cart message..................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Book Store Cart Functionality test" name="Cart count equals 0 after clearing cart" time="6.915">
+    <system-out><![CDATA[Given User is on the Non-fiction page.......................................passed
+And User adds the first Non-fiction book to the cart........................passed
+When User clears the cart from the popup....................................passed
+And User closes the cart popup..............................................passed
+Then the cart counter should be 0...........................................passed]]></system-out>
+  </testcase>
+</testsuite>
