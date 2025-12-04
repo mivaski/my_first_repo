@@ -5,7 +5,7 @@ import { AuthorsPage } from '../src/pom/authors.page';
 import { getBrowserInstance, closeBrowserInstance } from '../src/driver-manager';
 
 describe('TC1: Search authors via alphabet (letter "k")', function () {
-    this.timeout(45000);
+    this.timeout(60000);
 
     let driver: WebDriver;
     let navPage: NavigationPage;
