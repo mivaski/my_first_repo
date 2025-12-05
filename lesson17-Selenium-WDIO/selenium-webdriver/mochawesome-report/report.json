@@ -1,0 +1,185 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 0,
+    "passes": 0,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-04T13:25:26.614Z",
+    "end": "2025-12-04T13:26:26.792Z",
+    "duration": 60178,
+    "testsRegistered": 3,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 3,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "363e3d30-c1e6-43bf-8f56-3a13636203c8",
+      "title": "",
+      "fullFile": "C:\\Users\\mivas\\repo1\\lesson17-Selenium-WDIO\\selenium-webdriver\\specs\\authors.alphabet.spec.ts",
+      "file": "\\specs\\authors.alphabet.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d7ea8ea0-b1cd-476c-9389-ac58cc7cde62",
+          "title": "TC1: Search authors via alphabet (letter \"k\")",
+          "fullFile": "C:\\Users\\mivas\\repo1\\lesson17-Selenium-WDIO\\selenium-webdriver\\specs\\authors.alphabet.spec.ts",
+          "file": "\\specs\\authors.alphabet.spec.ts",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook for \"can open alphabet list\"",
+              "fullTitle": "TC1: Search authors via alphabet (letter \"k\") \"before each\" hook for \"can open alphabet list\"",
+              "timedOut": true,
+              "duration": 60161,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "driver=await(0,import_driver_manager.getBrowserInstance)();await driver.manage().setTimeouts({implicit:0});navPage=new import_navigation.NavigationPage(driver);authors=new import_authors.AuthorsPage(driver)",
+              "err": {
+                "message": "Error: Timeout of 60000ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves. (C:\\Users\\mivas\\repo1\\lesson17-Selenium-WDIO\\selenium-webdriver\\specs\\authors.alphabet.spec.ts)",
+                "estack": "Error: Timeout of 60000ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves. (C:\\Users\\mivas\\repo1\\lesson17-Selenium-WDIO\\selenium-webdriver\\specs\\authors.alphabet.spec.ts)\n    at listOnTimeout (node:internal/timers:608:17)\n    at process.processTimers (node:internal/timers:543:7)",
+                "diff": null
+              },
+              "uuid": "08844731-e24f-439b-820e-c774267af85a",
+              "parentUUID": "d7ea8ea0-b1cd-476c-9389-ac58cc7cde62",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"TC1: Search authors via alphabet (letter \"k\")\"",
+              "fullTitle": "TC1: Search authors via alphabet (letter \"k\") \"after each\" hook in \"TC1: Search authors via alphabet (letter \"k\")\"",
+              "timedOut": false,
+              "duration": 8,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await(0,import_driver_manager.closeBrowserInstance)(driver)",
+              "err": {},
+              "uuid": "58cdf989-bccd-414c-af6f-e57b1961b388",
+              "parentUUID": "d7ea8ea0-b1cd-476c-9389-ac58cc7cde62",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "can open alphabet list",
+              "fullTitle": "TC1: Search authors via alphabet (letter \"k\") can open alphabet list",
+              "timedOut": false,
+              "duration": 0,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await navPage.openBaseUrl();await navPage.openAlphabet();const alphabetList=await driver.findElements({css:\"#alphabet_list__\"});(0,import_chai.expect)(alphabetList.length).to.be.greaterThan(0)",
+              "err": {},
+              "uuid": "8bc92187-6824-4e29-87f5-3ff8b8a5758f",
+              "parentUUID": "d7ea8ea0-b1cd-476c-9389-ac58cc7cde62",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "letter K page shows publishers list",
+              "fullTitle": "TC1: Search authors via alphabet (letter \"k\") letter K page shows publishers list",
+              "timedOut": false,
+              "duration": 0,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await navPage.openBaseUrl();await navPage.openAlphabet();await authors.openLetterK();const publishers=await driver.findElements({css:\".publishers_list\"});(0,import_chai.expect)(publishers.length).to.be.greaterThan(0)",
+              "err": {},
+              "uuid": "216a0b22-3582-46cc-981b-40b32e8f834b",
+              "parentUUID": "d7ea8ea0-b1cd-476c-9389-ac58cc7cde62",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "open site -> alphabet -> letter K -> verify links",
+              "fullTitle": "TC1: Search authors via alphabet (letter \"k\") open site -> alphabet -> letter K -> verify links",
+              "timedOut": false,
+              "duration": 0,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await navPage.openBaseUrl();await navPage.openAlphabet();await authors.openLetterK();const hrefs=await authors.collectAuthorLinks();(0,import_chai.expect)(hrefs.length).to.be.greaterThan(0);for(const href of hrefs){const lower=href.toLowerCase();(0,import_chai.expect)(lower).to.include(\"authors/\");const after=lower.split(\"authors/\")[1]||\"\";(0,import_chai.expect)(after).to.include(\"k\")}",
+              "err": {},
+              "uuid": "fe78b97e-503d-45af-8e69-9ab792f50264",
+              "parentUUID": "d7ea8ea0-b1cd-476c-9389-ac58cc7cde62",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [
+            "8bc92187-6824-4e29-87f5-3ff8b8a5758f",
+            "216a0b22-3582-46cc-981b-40b32e8f834b",
+            "fe78b97e-503d-45af-8e69-9ab792f50264"
+          ],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 60000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 60000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.4"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "mochawesome-report",
+        "reportFilename": "report",
+        "html": "true",
+        "json": "true"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

@@ -1,7 +1,15 @@
 {
-    "extension": "ts",
-    "spec": "specs/*.spec.ts",
     "require": ["tsx", "./hooks/mocha-global-setup.hook.ts"],
     "retries": 2,
-    "timeout": 120000
+    "extension": ["ts"],
+    "spec": "specs/**/*.spec.ts",
+    "reporter": "mochawesome",
+    "reporter-option": [
+    "reportDir=mochawesome-report",
+    "reportFilename=report",
+    "html=true",
+    "json=true"
+    ],
+    "timeout": 60000
 }
+

@@ -4,6 +4,9 @@ node_modules/
 build/
 **/*.js
 cookies.json
+allure-results/
+local.log
+log/
 
 # Playwright
 /test-results/
