@@ -1,0 +1,17 @@
+node_modules/
+.vscode/
+.idea/
+build/
+**/*.js
+cookies.json
+reports/
+videos/
+
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
