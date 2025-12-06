@@ -4,8 +4,9 @@ node_modules/
 build/
 **/*.js
 cookies.json
-videos/
 reports/
+videos/
+
 
 # Playwright
 /test-results/
@@ -13,3 +14,4 @@ reports/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
