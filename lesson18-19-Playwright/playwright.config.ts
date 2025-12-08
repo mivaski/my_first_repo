@@ -22,7 +22,7 @@ export default defineConfig({
     /* Opt out of parallel tests on CI. */
     workers: process.env.CI ? 1 : undefined,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-    reporter: 'html',
+    reporter: [['html'],  ['allure-playwright']],
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         /* Base URL to use in actions like `await page.goto('')`. */
@@ -42,8 +42,8 @@ export default defineConfig({
                 ...devices['Desktop Chrome'],
                 headless: false,
                 viewport: {
-                    width: 1680,
-                    height: 900
+                    width: 1280,
+                    height: 720
                 }
             }
         }
