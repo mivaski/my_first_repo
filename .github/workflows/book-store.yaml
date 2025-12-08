@@ -44,7 +44,7 @@ jobs:
         report-file: ${{ env.BUILD_FOLDER }}/test-results/test-results.json
         report-tag: 'Test Results Summary'
         job-summary: true
-        comment-on-pr: true
+        create-comment: true 
     
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
