@@ -60,5 +60,5 @@ export class MainNavigationComponent extends BaseHeaderComponent {
     public async openSubmenu(name: string): Promise<DropdownMenuComponent> {
         await this.hoverItem(name);
         return this.getDropdown(name);
-}
+    }
 }

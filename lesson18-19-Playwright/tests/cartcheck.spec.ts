@@ -41,5 +41,3 @@ test.describe('Cart functionality', () => {
     });
 });
 
-
-
