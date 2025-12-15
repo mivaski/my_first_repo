@@ -1,0 +1,15 @@
+import { useState } from 'react';
+import './App.css';
+import ExpenseTracker from './Components/ExpenseTracker';
+
+function App() {
+
+
+  return (
+    <>
+      <ExpenseTracker />
+    </>
+  )
+}
+
+export default App
