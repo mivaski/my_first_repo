@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  expense-tracker-tests:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: expense-tracker-tests
+    volumes:
+      # Mount the test results so you can access them from host
+      - ./lesson23/Expense-Tracker/test-results:/app/test-results
+      - ./lesson23/Expense-Tracker/playwright-report:/app/playwright-report
+    environment:
+      - CI=true
+    # Override the default command if you want to run different tests
+    # reporter:
+    #  build:
+    #   context: .
+    #   dockerfile: docker/Dockerfile
+    #  container_name: playwright-reporter

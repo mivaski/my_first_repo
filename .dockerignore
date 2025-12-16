@@ -1,0 +1,48 @@
+# Git
+.git
+.gitignore
+
+# Node modules (will be installed in container)
+**/node_modules
+
+# Test outputs (generated during runs)
+**/test-results
+**/playwright-report
+**/blob-report
+**/allure-results
+**/allure-report
+**/mochawesome-report
+
+# Local environment files
+**/.env
+**/.env.local
+
+# IDE
+.vscode
+.idea
+**/.claude
+
+# Other lessons (only need lesson23)
+lesson3
+lesson4
+lesson5
+lesson6
+lesson7
+lesson8
+lesson9
+lesson10
+lesson11
+lesson12
+lesson13
+lesson14-framework
+lesson15-16
+lesson17-Selenium-WDIO
+lesson18-19-Playwright
+lesson18-Playwright
+lesson20-Cucumber.js
+
+# Misc
+*.log
+.DS_Store
+Thumbs.db
+reports/
